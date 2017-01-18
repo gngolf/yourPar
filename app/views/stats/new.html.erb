@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Your Par</title>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			// $("#hole1_par").focus(function(){
+			// 	total = $("#hole1_par").val()+ $("#hole2_par").val();
+			// 	$("#total").val(total);
+			// });
+			$('td').hover(function(){
+				$(this).addClass("hover");
+			}, function(){
+				$(this).removeClass("hover");
+			})
+			
+			
+
+		});
+		
+	</script>
+	<style type="text/css">
+    #limit {
+        width: 900px;
+        color: green;
+    }
+    </style>
+</head>
+<body>
+
+
+<h2>Hi <%= @user.first_name %>!</h2>
+
+<form action="/stats/<%= @user.id %>/new" method="post">
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+	<input type="hidden" name="stat[user_id]" value="<%= @user.id %>">
+	Course:<input type="text" name="stat[course]"> Score:<input type="text" name="stat[score]">
+	<p>Enter the par for each hole:</p>
+	<div id="limit">
+		
+		<table style="max-width: 800px;">
+			<thead>
+				<tr>
+					<th>Hole</th>
+					<th>1</th>
+					<th>2</th>
+					<th>3</th>
+					<th>4</th>
+					<th>5</th>
+					<th>6</th>
+					<th>7</th>
+					<th>8</th>
+					<th>9</th>
+					<th>Out</th>
+					<th>10</th>
+					<th>11</th>
+					<th>12</th>
+					<th>13</th>
+					<th>14</th>
+					<th>15</th>
+					<th>16</th>
+					<th>17</th>
+					<th>18</th>
+					<th>In</th>
+					<th>Total</th>
+				</tr>
+			</thead>
+		    <tbody>
+		        <tr>
+		           <td>Par</td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole1_par]" id="hole1_par"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole2_par]" id="hole2_par"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole3_par]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole4_par]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole5_par]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole6_par]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole7_par]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole8_par]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole9_par]"></td>
+		           <td> <!-- <input type="text" name="front9" id="front9"> --> </td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole10_par]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole11_par]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole12_par]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole13_par]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole14_par]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole15_par]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole16_par]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole17_par]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole18_par]"></td>
+		           <td><!--<input type="text" name="back9" id="back9">--></td>
+		           <td><!--<input type="text" name="total" id="total">--></td>
+		        </tr>
+		         <tr>
+		           <td>Your Score</td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole1_score]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole2_score]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole3_score]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole4_score]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole5_score]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole6_score]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole7_score]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole8_score]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole9_score]"></td>
+		           <td></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole10_score]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole11_score]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole12_score]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole13_score]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole14_score]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole15_score]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole16_score]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole17_score]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole18_score]"></td>
+		           <td></td>
+		           <td></td>
+		        </tr>
+		        <tr>
+		           <td>Fairway Hit</td>
+		           <td><select name="stat[hole1_fway]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
+		           <td><select name="stat[hole2_fway]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
+		           <td><select name="stat[hole3_fway]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
+		           <td><select name="stat[hole4_fway]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
+		           <td><select name="stat[hole5_fway]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
+		           <td><select name="stat[hole6_fway]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
+		           <td><select name="stat[hole7_fway]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
+		           <td><select name="stat[hole8_fway]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
+		           <td><select name="stat[hole9_fway]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
+		           <td></td>
+		           <td><select name="stat[hole10_fway]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
+		           <td><select name="stat[hole11_fway]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
+		           <td><select name="stat[hole12_fway]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
+		           <td><select name="stat[hole13_fway]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
+		           <td><select name="stat[hole14_fway]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
+		           <td><select name="stat[hole15_fway]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
+		           <td><select name="stat[hole16_fway]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
+		           <td><select name="stat[hole17_fway]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
+		           <td><select name="stat[hole18_fway]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
+		           <td></td>
+		           <td></td>
+		        </tr>
+		        <tr>
+		           <td>Green Hit</td>
+		           <td><select name="stat[hole1_gir]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option><option value="short">short</option><option value="long">long</option></select></td>
+		           <td><select name="stat[hole2_gir]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option><option value="short">short</option><option value="long">long</option></select></td>
+		           <td><select name="stat[hole3_gir]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option><option value="short">short</option><option value="long">long</option></select></td>
+		           <td><select name="stat[hole4_gir]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option><option value="short">short</option><option value="long">long</option></select></td>
+		           <td><select name="stat[hole5_gir]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option><option value="short">short</option><option value="long">long</option></select></td>
+		           <td><select name="stat[hole6_gir]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option><option value="short">short</option><option value="long">long</option></select></td>
+		           <td><select name="stat[hole7_gir]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option><option value="short">short</option><option value="long">long</option></select></td>
+		           <td><select name="stat[hole8_gir]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option><option value="short">short</option><option value="long">long</option></select></td>
+		           <td><select name="stat[hole9_gir]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option><option value="short">short</option><option value="long">long</option></select></td>
+		           <td></td>
+		           <td><select name="stat[hole10_gir]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option><option value="short">short</option><option value="long">long</option></select></td>
+		           <td><select name="stat[hole11_gir]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option><option value="short">short</option><option value="long">long</option></select></td>
+		           <td><select name="stat[hole12_gir]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option><option value="short">short</option><option value="long">long</option></select></td>
+		           <td><select name="stat[hole13_gir]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option><option value="short">short</option><option value="long">long</option></select></td>
+		           <td><select name="stat[hole14_gir]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option><option value="short">short</option><option value="long">long</option></select></td>
+		           <td><select name="stat[hole15_gir]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option><option value="short">short</option><option value="long">long</option></select></td>
+		           <td><select name="stat[hole16_gir]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option><option value="short">short</option><option value="long">long</option></select></td>
+		           <td><select name="stat[hole17_gir]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option><option value="short">short</option><option value="long">long</option></select></td>
+		           <td><select name="stat[hole18_gir]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option><option value="short">short</option><option value="long">long</option></select></td>
+		           <td></td>
+		           <td></td>
+		        </tr>
+		         <tr>
+		           <td>Putts</td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole1_putts]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole2_putts]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole3_putts]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole4_putts]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole5_putts]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole6_putts]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole7_putts]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole8_putts]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole9_putts]"></td>
+		           <td></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole10_putts]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole11_putts]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole12_putts]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole13_putts]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole14_putts]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole15_putts]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole16_putts]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole17_putts]"></td>
+		           <td><input type="text" style="width: 44px;" name="stat[hole18_putts]"></td>
+		           <td></td>
+		           <td></td>
+		        </tr>
+		    </tbody>
+		</table>
+	</div> 
+	<p><b>Total Number</b> of penalty strokes:<input type="text" name="stat[penalties]"></p> 
+	<p><b>Total Number</b> of up and downs for par:<input type="text" name="stat[up_down]"></p>
+	<p>Sand Attempts:<input type="text" name="stat[sand_attempt]"> Sand Saves: <input type="text" name="stat[sand_save]"></p>
+	<p>Holed putt length (in ft and in decimal format i.e. "3.5"):<input type="text" name="stat[holed_putt_length"></p>
+	<input type="submit" name="submit" value="Submit Your Round">
+
+</form>
+<h3>**Test**</h3>
+calc score: <%= @score %>
+raw input: <%= @score2 %>
+average: <%= @averageScore %>
+count: <%= @count %>
+	
+
+	
+</body>
+</html>
