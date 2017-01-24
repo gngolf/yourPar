@@ -1,2 +1,25 @@
-<h2>Hi <%= @user.first_name %>!</h2>
-<a href="/stats/<%=@user.id %>/new">New Round</a>
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			
+			
+			$('select').material_select();
+			Materialize.updateTextFields();
+			
+			
+
+		});
+		
+	</script>
+</head>
+<body>
+	<div class="container">
+		<div class="name">
+			<h2>Hi <%= @user.first_name %>!</h2>
+			<a href="/stats/<%=@user.id %>/new">New Round</a>
+		</div>
+	</div>
+</body>
+</html>

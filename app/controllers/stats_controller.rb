@@ -7,10 +7,11 @@ class StatsController < ApplicationController
   	@stats = Stat.new
 
   	# @myStats = Stat.where(user_id = session[:user_id]).all
-  	@score = Stat.where(user_id:session[:user_id]).pluck(:hole1_score, :hole2_score, :hole3_score, :hole4_score, :hole5_score, :hole6_score, :hole7_score, :hole8_score, :hole9_score, :hole10_score, :hole11_score, :hole12_score, :hole13_score, :hole14_score, :hole15_score, :hole16_score, :hole17_score, :hole18_score).map(&:sum).sum / Stat.where(user_id:session[:user_id]).count
+  	@score = Stat.where(user_id:session[:user_id]).pluck(:hole1_score, :hole2_score, :hole3_score, :hole4_score, :hole5_score, :hole6_score, :hole7_score, :hole8_score, :hole9_score, :hole10_score, :hole11_score, :hole12_score, :hole13_score, :hole14_score, :hole15_score, :hole16_score, :hole17_score, :hole18_score)
   	@score2 = Stat.where(user_id:session[:user_id]).pluck(:score)
   	@averageScore = Stat.where(user_id:session[:user_id]).average(:hole1_score)
   	@count = Stat.where(user_id:session[:user_id]).count
+    @green = Stat.where(user_id:session[:user_id]).where("hole1_gir != ?", "yes").count  #not working yet
   	
   end
   def create
@@ -18,9 +19,8 @@ class StatsController < ApplicationController
   	if @stats.save
   		redirect_to :back
   	else
-  		puts "hello"
-  		# flash[:errors] = "errors"
-  		# redirect_to "/users/<%= @user.id %>/home"
+  		flash[:errors] = @stats.errors.full_messages
+  		redirect_to :back
   	end
   end
   def show
