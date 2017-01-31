@@ -24,8 +24,8 @@
         <div class="nav-wrapper">
           <a href="/users/<%= @user.id %>/home" class="brand-logo"><%= image_tag "logo.png" %></a>
           <ul id="nav-mobile" class="right">
-          	<li id="nav-name"><%= @user.first_name %></li>
             <% if current_user %>
+          	  <li id="nav-name"><%= @user.first_name %></li>
               <li><form action='/sessions/destroy' method='post'>
                 <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
                 <input type='hidden' name='_method' value='delete'>
