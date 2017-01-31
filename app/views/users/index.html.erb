@@ -7,28 +7,56 @@
 	<div class="container">
 		
 		<div class="name">
-			<h2>Please Login</h2>
+			<h3>Please Login or Register Below</h3>
 		</div>
+		<br>
+		<br>
 
 		<%= flash[:errors] %>
 
-
+		<h4>Login</h4>
 		<form action="/sessions" method="post">
 			<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-			Email<input type="text" name="email">
-			Password<input type="password" name="password">
-			<input type="submit" name="submit" value="Login">
+			<div class="input-field">
+				<input id="email" type="text" name="email">
+				<label for="email">Email</label>
+			</div>
+			<div class="input-field">
+				<input id="password" type="password" name="password">
+				<label for="password">Password</label>
+			</div>
+			<button class="btn waves-effect waves-light cyan accent-3" type="submit" name="submit" >Login
+			</button>
 		</form>
-		<hr>
-		<h2>If you do not already have an account please sign up below!</h2>
+		<br>
+		<br>
+		<h4>Register</h4>
+
 		<form action="/users/new" method="post">
 			<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-			First Name<input type="text" name="user[first_name]">
-			Last Name<input type="text" name="user[last_name]">
-			Email<input type="text" name="user[email]">
-			Password<input type="password" name="user[password]">
-			Password Confirmation<input type="password" name="user[password_confirmation]">
-			<input type="submit" name="submit" value="Sign Up">
+			<div class="input-field">
+				<input id="first_name" type="text" name="user[first_name]">
+
+				<label for="first_name" >First Name</label>
+			</div>
+			<div class="input-field">
+				<input id="last_name" type="text" name="user[last_name]">
+				<label for="last_name">Last Name</label>
+			</div>
+			<div class="input-field">
+				<input id="email" type="text" name="user[email]">
+				<label for="email">Email</label>
+			</div>
+			<div class="input-field">
+				<input id="password" type="password" name="user[password]">
+				<label for="password">Password</label>
+			</div>
+			<div class="input-field">
+				<input id="password_confirmation" type="password" name="user[password_confirmation]">
+				<label for="password_confirmation">Password Confirmation</label>
+			</div>
+			<button class="btn waves-effect waves-light cyan accent-3" type="submit" name="submit" >Register
+			</button>
 		</form>
 	</div>
 </body>

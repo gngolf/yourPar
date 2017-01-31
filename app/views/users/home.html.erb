@@ -1,25 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<script type="text/javascript">
-		$(document).ready(function(){
-			
-			
-			$('select').material_select();
-			Materialize.updateTextFields();
-			
-			
-
-		});
-		
-	</script>
+	
 </head>
 <body>
 	<div class="container">
 		<div class="name">
 			<h2>Hi <%= @user.first_name %>!</h2>
-			<a href="/stats/<%=@user.id %>/new">New Round</a>
+			<a class="btn-large waves-effect waves-light cyan accent-3" href="/stats/<%=@user.id %>/new">ADD A ROUND</a>
+			<a class="btn-large waves-effect waves-light cyan accent-3" href="/stats/<%=@user.id %>/show">View Stats</a>
 		</div>
 	</div>
+	<br>
+	<br>
 </body>
 </html>

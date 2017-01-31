@@ -21,12 +21,11 @@
 	</script>
 	
 </head>
-<body class="green lighten-4">
+<body>
 
-<div class="container">
+<div class="container green lighten-4 z-depth-2">
 
 	<h2 class="name">Hi <%= @user.first_name %>!</h2>
-	<hr>
 
 	<% if flash[:errors] %>
 		<%if flash[:errors].length < 6%>
@@ -37,22 +36,24 @@
 			<%= "Please complete the form before submitting" %>
 		<%end%>
 	<%end%>
-		
-	<div>
+	
+	
+    	
+	<div class="green lighten-4">
 		<form action="/stats/<%= @user.id %>/new" method="post">
 			<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 			<input type="hidden" name="stat[user_id]" value="<%= @user.id %>">
 			<div class="input-field">
 				<input id="course" type="text" name="stat[course]">
-				<label class="active" for="course">Course</label> 
+				<label for="course">Course</label> 
 			</div>
 			<div class="input-field">
 				<input id="score" type="text" name="stat[score]">
-				<label class="active" for="score">Score</label>
+				<label for="score">Score</label>
 			</div>
-			<div id="table">
-				
-				<table class="centered">
+			<div id="table" class="centered green lighten-2 z-depth-2">
+				<h4>Score Card</h4>
+				<table>
 					<thead>
 						<tr>
 							<th>Hole</th>
@@ -131,25 +132,25 @@
 				        <div>
 					        <tr>
 					           <td>Fairway Hit</td>
-					           <td><select class="browser-default" name="stat[hole1_fway]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
-					           <td><select class="browser-default" name="stat[hole2_fway]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
-					           <td><select class="browser-default" name="stat[hole3_fway]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
-					           <td><select class="browser-default" name="stat[hole4_fway]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
-					           <td><select class="browser-default" name="stat[hole5_fway]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
-					           <td><select class="browser-default" name="stat[hole6_fway]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
-					           <td><select class="browser-default" name="stat[hole7_fway]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
-					           <td><select class="browser-default" name="stat[hole8_fway]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
-					           <td><select class="browser-default" name="stat[hole9_fway]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
+					           <td><select class="browser-default" name="stat[hole1_fway]"><option value=" "></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
+					           <td><select class="browser-default" name="stat[hole2_fway]"><option value=" "></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
+					           <td><select class="browser-default" name="stat[hole3_fway]"><option value=" "></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
+					           <td><select class="browser-default" name="stat[hole4_fway]"><option value=" "></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
+					           <td><select class="browser-default" name="stat[hole5_fway]"><option value=" "></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
+					           <td><select class="browser-default" name="stat[hole6_fway]"><option value=" "></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
+					           <td><select class="browser-default" name="stat[hole7_fway]"><option value=" "></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
+					           <td><select class="browser-default" name="stat[hole8_fway]"><option value=" "></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
+					           <td><select class="browser-default" name="stat[hole9_fway]"><option value=" "></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
 					           <td></td>
-					           <td><select class="browser-default" name="stat[hole10_fway]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
-					           <td><select class="browser-default" name="stat[hole11_fway]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
-					           <td><select class="browser-default" name="stat[hole12_fway]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
-					           <td><select class="browser-default" name="stat[hole13_fway]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
-					           <td><select class="browser-default" name="stat[hole14_fway]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
-					           <td><select class="browser-default" name="stat[hole15_fway]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
-					           <td><select class="browser-default" name="stat[hole16_fway]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
-					           <td><select class="browser-default" name="stat[hole17_fway]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
-					           <td><select class="browser-default" name="stat[hole18_fway]"><option value=""></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
+					           <td><select class="browser-default" name="stat[hole10_fway]"><option value=" "></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
+					           <td><select class="browser-default" name="stat[hole11_fway]"><option value=" "></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
+					           <td><select class="browser-default" name="stat[hole12_fway]"><option value=" "></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
+					           <td><select class="browser-default" name="stat[hole13_fway]"><option value=" "></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
+					           <td><select class="browser-default" name="stat[hole14_fway]"><option value=" "></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
+					           <td><select class="browser-default" name="stat[hole15_fway]"><option value=" "></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
+					           <td><select class="browser-default" name="stat[hole16_fway]"><option value=" "></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
+					           <td><select class="browser-default" name="stat[hole17_fway]"><option value=" "></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
+					           <td><select class="browser-default" name="stat[hole18_fway]"><option value=" "></option><option value="yes">yes</option><option value="left">left</option><option value="right">right</option></select></td>
 					           <td></td>
 					           <td></td>
 					        </tr>
@@ -218,20 +219,13 @@
 			<div class="input-field"> 
 				<input id="sand_save" type="text" name="stat[sand_save]"><label for="sand_save">Sand Saves</label></p>
 			</div>
-			<button class="btn waves-effect waves-light" type="submit" name="submit" >Submit Your Round
+			<button class="btn waves-effect waves-light cyan accent-3" type="submit" name="submit" >Submit Your Round
 				<i class="material-icons right">done</i>
 			</button>
 
 		</form>
 	</div>
-	<h3>**Test**</h3>
-	<% if @score %>
-		calc score: <%= @score %>
-	<%end%>
-	raw input: <%= @score2 %>
-	average: <%= @averageScore %>
-	count: <%= @count %>
-	gir: <%= @green %>
+	
 </div>
 
 	

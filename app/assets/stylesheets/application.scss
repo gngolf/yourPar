@@ -1,3 +1,8 @@
+@import "materialize/components/color";
+$primary-color: color("indigo", "lighten-2") !default;
+$input-border-color: color("grey", "darken-4") !default;
+$select-background: color("grey", "lighten-1") !default;
+$select-border: 1px solid color("green", "base") !default;
 @import "materialize";
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
@@ -20,8 +25,16 @@ body, html
     background-color: #EDEDED !important;
 }
 
+nav
+{
+	padding-left: 5%;
+	padding-right: 5%;
+}
+
 .intro
 {
+	background-image: url('course2.png');
+	width: 100%;
     text-align: center;
     padding-top: 13%;
     padding-bottom: 13%;
@@ -44,30 +57,83 @@ body, html
     font-size: 1.2rem;
 }
 
-#table1
-{
 
-}
 
 .name
 {
 	text-align: center;
 }
 
-label
-{
-	color: green;
-}
 select
 {
 	font-size: 1rem;
 }
-#table 
+#table
 {
+	text-align: center;
 	width: 140%;
 	margin-left: -20%;
 }
 #table input
 {
 	text-align: center;
+}
+
+.nav-wrapper img
+{
+	height: 60px;
+}
+
+footer
+{
+	text-align: center;
+}
+
+.container
+{
+	padding: 10px;
+}
+
+.input-field label
+{
+	color: black;
+}
+
+.input-field input[type=text]
+{
+	color: black;
+}
+
+#stats_table
+{
+	margin-top: 60px;
+}
+
+#nav-name
+{
+	text-transform: uppercase;
+	padding-right: 10px;
+
+}
+
+.stat_title
+{
+    text-align: center;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    margin-bottom: 50px;
+}
+
+.stat_title h5
+{
+	text-transform: uppercase;
+    background-color: #f5f5f5;
+    padding: 10px;
+    color: #333333;
+    display: inline-block;
+    font-size: 1.2rem;
+}
+.stat_title h1
+{
+	font-weight: 900;
 }

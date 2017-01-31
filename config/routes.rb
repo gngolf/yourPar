@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get '/sessions/destroy' => 'sessions#destroy'
   delete '/sessions/destroy' => 'sessions#destroy'
 
-  get 'stats/:id' => 'stats#home'
+  get 'stats/:id/show' => 'stats#show'
   get 'stats/:id/new' => 'stats#new'
   post 'stats/:id/new' => 'stats#create'
 

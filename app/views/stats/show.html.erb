@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src= 'http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+    <!--Import Google Icon Font-->
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	
+</head>
+<body>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <div class="navbar-fixed">
+      <nav>
+        <div class="nav-wrapper">
+          <a href="/users/<%= @user.id %>/home" class="brand-logo"><%= image_tag "logo.png" %></a>
+          <ul id="nav-mobile" class="right">
+          	<li id="nav-name"><%= @user.first_name %></li>
+            <% if current_user %>
+              <li><form action='/sessions/destroy' method='post'>
+                <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+                <input type='hidden' name='_method' value='delete'>
+                <button class="btn waves-effect waves-light cyan accent-3" type="submit" name="submit">Logout</button>
+              </form></li>
+            <% end %>
+          </ul>
+        </div>
+      </nav>
+    </div>
+<div class="container green lighten-4 z-depth-2">
+	<div class="stat_title">
+		<h1 class="grey-text text-lighten-5">yourPAR</h1>
+	    <h5 class="grey lighten-4 grey-text text-darken-1">golf statistics for the modern player</h5>
+	    <br>
+	    <a class="btn-large waves-effect waves-light cyan accent-3" href="/stats/<%=@user.id %>/new">ADD A ROUND</a>
+	</div>
+	<div class="row" id="stats_table">
+	    <div class="col s12">
+	      	<ul class="tabs">
+	        	<li class="tab col s4"><a href="#stats_summary">Statistical Summary</a></li>
+	        	<li class="tab col s4"><a href="#last_round">Last Round</a></li>
+	        	<li class="tab col s4"><a href="#last_5_rounds">Last 5 Rounds</a></li>
+	        	
+	      	</ul>
+	    </div>
+	    <div id="stats_summary" class="col s12">
+	    	<table class="striped">
+	    		<thead>
+	    			<tr>
+	    				<th></th>
+	    				<th>Overall</th>
+	    				<th>Front 9</th>
+	    				<th>Back 9</th>
+	    				<th>First 6</th>
+	    				<th>Middle 6</th>
+	    				<th>Last 6</th>
+	    			</tr>
+	    		</thead>
+	    		<tbody>
+	    			<tr>
+	    				<td>Scoring Average</td>
+	    				<td><%= @averageScore %></td>
+	    				<td><%= @frontAverage %></td>
+	    				<td><%= @backAverage %></td>
+	    				<td><%= @first6average %></td>
+	    				<td><%= @middle6average %></td>
+	    				<td><%= @last6average %></td>
+	    			</tr>
+	    			<tr>
+	    				<td>To Par</td>
+	    				<td><%= @toPar %></td>
+	    				<td><%= @frontToPar %></td>
+	    				<td><%= @backToPar %></td>
+	    				<td><%= @first6ToPar %></td>
+	    				<td><%= @middle6ToPar %></td>
+	    				<td><%= @last6ToPar %></td>
+	    			</tr>
+	    			<tr>
+	    				<td>Fairways Hit</td>
+	    				<td><%= @fairway %>%</td>
+	    				<td><%= @FrontFairway %>%</td>
+	    				<td><%= @BackFairway %>%</td>
+	    				<td><%= @First6Fairway %>%</td>
+	    				<td><%= @Middle6Fairway %>%</td>
+	    				<td><%= @Last6Fairway %>%</td>
+
+	    			</tr>
+	    			<tr>
+	    				<td>Fairways Missed Left</td>
+	    				<td><%= @fairwayLeft %>%</td>
+	    				<td><%= @FrontFairwayLeft %>%</td>
+	    				<td><%= @BackFairwayLeft %>%</td>
+	    				<td><%= @First6FairwayLeft %>%</td>
+	    				<td><%= @Middle6FairwayLeft %>%</td>
+	    				<td><%= @Last6FairwayLeft %>%</td>
+	    			</tr>
+	    			<tr>
+	    				<td>Fairways Missed Right</td>
+	    				<td><%= @fairwayRight %>%</td>
+	    				<td><%= @FrontFairwayRight %>%</td>
+	    				<td><%= @BackFairwayRight %>%</td>
+	    				<td><%= @First6FairwayRight %>%</td>
+	    				<td><%= @Middle6FairwayRight %>%</td>
+	    				<td><%= @Last6FairwayRight %>%</td>
+	    			</tr>
+	    			<tr>
+	    				<td>Greens In Regulation</td>
+	    				<td><%= @gir %>%</td>
+	    				<td><%= @front_gir %>%</td>
+	    				<td><%= @back_gir %>%</td>
+	    				<td><%= @first6_gir %>%</td>
+	    				<td><%= @middle6_gir %>%</td>
+	    				<td><%= @last6_gir %>%</td>
+	    			</tr>
+	    			<tr>
+	    				<td>Greens Missed Left</td>
+	    				<td><%= @greenLeft %>%</td>
+	    				<td><%= @front_greenLeft %>%</td>
+	    				<td><%= @back_greenLeft %>%</td>
+	    				<td><%= @first6_greenLeft %>%</td>
+	    				<td><%= @middle6_greenLeft %>%</td>
+	    				<td><%= @last6_greenLeft %>%</td>
+	    			</tr>
+	    			<tr>
+	    				<td>Greens Missed Right</td>
+	    				<td><%= @greenRight %>%</td>
+	    				<td><%= @front_greenRight %>%</td>
+	    				<td><%= @back_greenRight %>%</td>
+	    				<td><%= @first6_greenRight %>%</td>
+	    				<td><%= @middle6_greenRight %>%</td>
+	    				<td><%= @last6_greenRight %>%</td>
+	    			</tr>
+	    			<tr>
+	    				<td>Greens Missed Short</td>
+	    				<td><%= @greenShort %>%</td>
+	    				<td><%= @front_greenShort %>%</td>
+	    				<td><%= @back_greenShort %>%</td>
+	    				<td><%= @first6_greenShort %>%</td>
+	    				<td><%= @middle6_greenShort %>%</td>
+	    				<td><%= @last6_greenShort %>%</td>
+	    			</tr>
+	    			<tr>
+	    				<td>Greens Missed Long</td>
+	    				<td><%= @greenLong %>%</td>
+	    				<td><%= @front_greenLong %>%</td>
+	    				<td><%= @back_greenLong %>%</td>
+	    				<td><%= @first6_greenLong %>%</td>
+	    				<td><%= @middle6_greenLong %>%</td>
+	    				<td><%= @last6_greenLong %>%</td>
+	    			</tr>
+	    			<tr>
+	    				<td>Putts</td>
+	    				<td><%= @averagePutts %></td>
+	    				<td><%= @frontAvePutts %></td>
+	    				<td><%= @backAvePutts %></td>
+	    				<td><%= @first6AvePutts %></td>
+	    				<td><%= @middle6AvePutts %></td>
+	    				<td><%= @last6AvePutts %></td>
+	    			</tr>
+	    			<tr>
+	    				<td>Up and Downs for Par</td>
+	    				<td><%= @up_down %></td>
+	    			</tr>
+	    			<tr>
+	    				<td>Sand Saves</td>
+	    				<td><%= @sand_percent %>% (<%= @sand_save %>/<%= @sand_attempt %>)</td>
+	    			</tr>
+	    			<tr>
+	    				<td>Penalty Strokes</td>
+	    				<td>+ <%= @penalties %></td>
+	    			</tr>
+	    		</tbody>
+	    	</table>
+	    </div>
+	    <div id="last_round" class="col s12">
+	    	<table class="centered">
+	    		<thead>
+	    			<tr>
+	    				<th></th>
+	    				<th>Overall</th>
+	    				<th>Front 9</th>
+	    				<th>Back 9</th>
+	    				<th>First 6</th>
+	    				<th>Middle 6</th>
+	    				<th>Last 6</th>
+	    			</tr>
+	    		</thead>
+	    		<tbody>
+	    			<tr>
+	    				<td>Score</td>
+	    				<td><%= @lastScore %></td>
+	    			</tr>
+	    			<tr>
+	    				<td>To Par</td>
+	    			</tr>
+	    			<tr>
+	    				<td>Fairways</td>
+	    			</tr>
+	    			<tr>
+	    				<td>Greens In Regulation</td>
+	    			</tr>
+	    			<tr>
+	    				<td>Putts</td>
+	    			</tr>
+	    			<tr>
+	    				<td>Up and Downs or Par</td>
+	    			</tr>
+	    			<tr>
+	    				<td>Sand Saves</td>
+	    			</tr>
+	    			<tr>
+	    				<td>Penalty Strokes</td>
+	    			</tr>
+	    		</tbody>
+	    	</table>
+	    </div>
+	    <div id="last_5_rounds" class="col s12">
+	    	<table class="centered">
+	    		<thead>
+	    			<tr>
+	    				<th></th>
+	    				<th>Overall</th>
+	    				<th>Front 9</th>
+	    				<th>Back 9</th>
+	    				<th>First 6</th>
+	    				<th>Middle 6</th>
+	    				<th>Last 6</th>
+	    			</tr>
+	    		</thead>
+	    		<tbody>
+	    			<tr>
+	    				<td>Scoring Average</td>
+	    				<td><%= @last5AveScore %></td>
+	    			</tr>
+	    			<tr>
+	    				<td>To Par</td>
+	    			</tr>
+	    			<tr>
+	    				<td>Fairways</td>
+	    			</tr>
+	    			<tr>
+	    				<td>Greens In Regulation</td>
+	    			</tr>
+	    			<tr>
+	    				<td>Putts</td>
+	    			</tr>
+	    			<tr>
+	    				<td>Up and Downs or Par</td>
+	    			</tr>
+	    			<tr>
+	    				<td>Sand Saves</td>
+	    			</tr>
+	    			<tr>
+	    				<td>Penalty Strokes</td>
+	    			</tr>
+	    		</tbody>
+	    	</table>
+	    </div>
+	</div>
+</div>
+</body>
+</html>
