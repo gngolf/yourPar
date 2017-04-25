@@ -438,7 +438,11 @@ class StatsController < ApplicationController
     @sand_attempt = Stat.where(user_id:session[:user_id]).sum(:sand_attempt)
     @sand_save = Stat.where(user_id:session[:user_id]).sum(:sand_save)
     sand_save = (@sand_save.to_f / @sand_attempt.to_f) * 100
-    @sand_percent = (@sand_save.to_f / @sand_attempt.to_f) * 100
+    if @sand_attempt == 0
+      @sand_percent = 0
+    else
+      @sand_percent = (@sand_save.to_f / @sand_attempt.to_f) * 100
+    end
     
 
     #penalties ************************************************************************************************************************
@@ -548,7 +552,46 @@ class StatsController < ApplicationController
     @last5Fairway = ((last5fYesCount.to_f / ((last5Fairways.count * 18) - last5nulCount)) * 100).round(1)
     @last5FairwayLeft = ((last5fLeftCount.to_f / ((last5Fairways.count * 18) - last5nulCount)) * 100).round(1)
     @last5FairwayRight = ((last5fRightCount.to_f / ((last5Fairways.count * 18) - last5nulCount)) * 100).round(1)
+
+    # greens
+    last5Greens = Stat.where(user_id:session[:user_id]).pluck(:hole1_gir, :hole2_gir, :hole3_gir, :hole4_gir, :hole5_gir, :hole6_gir, :hole7_gir, :hole8_gir, :hole9_gir, :hole10_gir, 
+        :hole11_gir, :hole12_gir, :hole13_gir, :hole14_gir, :hole15_gir, :hole16_gir, :hole17_gir, :hole18_gir)
+    last5gYesCount = 0
+    last5gLeftCount = 0
+    last5gRightCount = 0
+    last5gShortCount = 0
+    last5gLongCount = 0
+    
+    last5Greens.each do |nested|
+      nested.each do |i|
+        if i == "yes"
+          last5gYesCount += 1
+        elsif i == "left"
+          last5gLeftCount += 1   
+        elsif i == "right"
+          last5gRightCount += 1
+        elsif i == "short"
+          last5gShortCount += 1
+        else
+          last5gLongCount += 1
+        end
+      end
+    end
+    @last5Gir = ((last5gYesCount.to_f / (last5Greens.count * 18)) * 100).round(1)
+    @last5GreenLeft = ((last5gLeftCount.to_f / (last5Greens.count * 18)) * 100).round(1)
+    @last5GreenRight = ((last5gRightCount.to_f / (last5Greens.count * 18)) * 100).round(1)
+    @last5GreenShort = ((last5gShortCount.to_f / (last5Greens.count * 18)) * 100).round(1)
+    @last5GreenLong = ((last5gLongCount.to_f / (last5Greens.count * 18)) * 100).round(1)
+
+    # putts
+    last5TotalPutts = Stat.where(user_id:session[:user_id]).pluck(:hole1_putts, :hole2_putts, :hole3_putts, :hole4_putts, :hole5_putts, :hole6_putts, :hole7_putts, :hole8_putts, :hole9_putts, :hole10_putts, :hole11_putts, :hole12_putts, :hole13_putts, :hole14_putts, :hole15_putts, :hole16_putts, :hole17_putts, :hole18_putts).last(5)
+    @last5TotalPutts = last5TotalPutts.sum.sum
+    @last5AveragePutts = (@last5TotalPutts.to_f / last5TotalPutts.count).round(1)
    
+    # up and downs for par
+    last5Up_down = Stat.where(user_id:session[:user_id]).pluck(:up_down).last(5)
+    last5Up_downTotal = last5Up_down.sum
+    @last5Up_down = (last5Up_downTotal.to_f / last5Up_down.count).round(1)
 
 
 
