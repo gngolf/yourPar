@@ -221,7 +221,7 @@ class StatsController < ApplicationController
         end
       end
     end
-    @middle6_gir = ((gmiddle6YesCount.to_f / (@count.to_f * 6)) * 100).round(1)
+    @middle6_gir = ((gmiddle6YesCount.to_f / (@count.to_f * 6)) * 100).round(1) 
     @middle6_greenLeft = ((gmiddle6LeftCount.to_f / (@count.to_f * 6)) * 100).round(1)
     @middle6_greenRight = ((gmiddle6RightCount.to_f / (@count.to_f * 6)) * 100).round(1)
     @middle6_greenShort = ((gmiddle6ShortCount.to_f / (@count.to_f * 6)) * 100).round(1)
@@ -337,7 +337,7 @@ class StatsController < ApplicationController
     @BackFairwayLeft = ((fBackLeftCount.to_f / ((@count.to_f * 9) - fBacknulCount)) * 100).round(1)
     @BackFairwayRight = ((fBackRightCount.to_f / ((@count.to_f * 9) - fBacknulCount)) * 100).round(1)
 
-    #fairway first 6
+    #fairway first 6 *************************************************************************************************************
     fairwayFirst6 = Stat.where(user_id:session[:user_id]).pluck(:hole1_fway, :hole2_fway, :hole3_fway, :hole4_fway, :hole5_fway, :hole6_fway)
 
     fFirst6YesCount = 0
@@ -362,7 +362,7 @@ class StatsController < ApplicationController
     @First6FairwayLeft = ((fFirst6LeftCount.to_f / ((@count.to_f * 6) - fFirst6nulCount)) * 100).round(1)
     @First6FairwayRight = ((fFirst6RightCount.to_f / ((@count.to_f * 6) - fFirst6nulCount)) * 100).round(1)
 
-    #fairway middle 6
+    #fairway middle 6 ************************************************************************************************************
     fairwayMiddle6 = Stat.where(user_id:session[:user_id]).pluck(:hole7_fway, :hole8_fway, :hole9_fway, :hole10_fway, :hole11_fway, :hole12_fway)
 
     fMiddle6YesCount = 0
@@ -387,7 +387,7 @@ class StatsController < ApplicationController
     @Middle6FairwayLeft = ((fMiddle6LeftCount.to_f / ((@count.to_f * 6) - fMiddle6nulCount)) * 100).round(1)
     @Middle6FairwayRight = ((fMiddle6RightCount.to_f / ((@count.to_f * 6) - fMiddle6nulCount)) * 100).round(1)
 
-    #fairway last 6
+    #fairway last 6 ***********************************************************************************************************
     fairwayLast6 = Stat.where(user_id:session[:user_id]).pluck(:hole13_fway, :hole14_fway, :hole15_fway, :hole16_fway, :hole17_fway, :hole18_fway)
 
     fLast6YesCount = 0
@@ -413,7 +413,7 @@ class StatsController < ApplicationController
     @Last6FairwayRight = ((fLast6RightCount.to_f / ((@count.to_f * 6) - fLast6nulCount)) * 100).round(1)
    
 
-    #putting stats
+    #putting stats ****************************************************************************************************************
     @totalPutts = Stat.where(user_id:session[:user_id]).pluck(:hole1_putts, :hole2_putts, :hole3_putts, :hole4_putts, :hole5_putts, :hole6_putts, :hole7_putts, :hole8_putts, :hole9_putts, :hole10_putts, :hole11_putts, :hole12_putts, :hole13_putts, :hole14_putts, :hole15_putts, :hole16_putts, :hole17_putts, :hole18_putts).map(&:sum).sum
     @averagePutts = (@totalPutts.to_f / @count.to_f).round(1)
     
@@ -432,7 +432,7 @@ class StatsController < ApplicationController
     @last6Putts = Stat.where(user_id:session[:user_id]).pluck(:hole13_putts, :hole14_putts, :hole15_putts, :hole16_putts, :hole17_putts, :hole18_putts).map(&:sum).sum
     @last6AvePutts = (@last6Putts.to_f / @count.to_f).round(1)
     
-    #par save stats
+    #par save stats ****************************************************************************************************************
     up_down = Stat.where(user_id:session[:user_id]).sum(:up_down)
     @up_down = (up_down.to_f / @count.to_f).round(1) 
     @sand_attempt = Stat.where(user_id:session[:user_id]).sum(:sand_attempt)
@@ -441,19 +441,116 @@ class StatsController < ApplicationController
     @sand_percent = (@sand_save.to_f / @sand_attempt.to_f) * 100
     
 
-    #penalties
+    #penalties ************************************************************************************************************************
     @penalties = ((Stat.where(user_id:session[:user_id]).sum(:penalties)).to_f / @count.to_f).round(1)
 
 
-
+    # *********************************************************************************************************************************
+    # *********************************************************************************************************************************
+    # *********************************************************************************************************************************
+    # *********************************************************************************************************************************
+    # *********************************************************************************************************************************
 
     # last round
-    @lastScore = Stat.where(user_id:session[:user_id]).pluck(:hole1_score, :hole2_score, :hole3_score, :hole4_score, :hole5_score, :hole6_score, :hole7_score, :hole8_score, :hole9_score, :hole10_score, :hole11_score, :hole12_score, :hole13_score, :hole14_score, :hole15_score, :hole16_score, :hole17_score, :hole18_score).last.sum
-    
+    lastScore = Stat.where(user_id:session[:user_id]).pluck(:hole1_score, :hole2_score, :hole3_score, :hole4_score, :hole5_score, :hole6_score, :hole7_score, :hole8_score, :hole9_score, :hole10_score, :hole11_score, :hole12_score, :hole13_score, :hole14_score, :hole15_score, :hole16_score, :hole17_score, :hole18_score).last
+    @lastScore = lastScore.sum
+    @lastScoreFront = 0
+    for i in 0..8
+      @lastScoreFront += lastScore[i]
+    end
+    @lastScoreBack = 0
+    for i in 9..17
+      @lastScoreBack += lastScore[i]
+    end
+    @lastScoreFirst6 = 0
+    for i in 0..5 
+      @lastScoreFirst6 += lastScore[i]
+    end
+    @lastScoreMiddle6 = 0
+    for i in 6..11
+      @lastScoreMiddle6 += lastScore[i]
+    end
+    @lastScoreLast6 = 0
+    for i in 12..17
+      @lastScoreLast6 += lastScore[i]
+    end
+
+    # to par
+    lastRoundTotalPar = Stat.where(user_id:session[:user_id]).pluck(:hole1_par, :hole2_par, :hole3_par, :hole4_par, :hole5_par, :hole6_par, :hole7_par, :hole8_par, :hole9_par, :hole10_par, :hole11_par, :hole12_par, :hole13_par, :hole14_par, :hole15_par, :hole16_par, :hole17_par, :hole18_par).last
+    @lastTotalPar = lastRoundTotalPar.sum
+    @lastToPar = @lastScore - @lastTotalPar
+    lastTotalParFront = 0
+    for i in 0..8
+      lastTotalParFront += lastRoundTotalPar[i]
+    end
+    @lastToParFront = @lastScoreFront - lastTotalParFront
+
+    lastTotalParBack = 0
+    for i in 9..17
+      lastTotalParBack += lastRoundTotalPar[i]
+    end
+    @lastToParBack = @lastScoreBack - lastTotalParBack
+
+    lastTotalParFirst6 = 0
+    for i in 0..5
+      lastTotalParFirst6 += lastRoundTotalPar[i]
+    end
+    @lastToParFirst6 = @lastScoreFirst6 - lastTotalParFirst6
+
+    lastTotalParMiddle6 = 0
+    for i in 6..11
+      lastTotalParMiddle6 += lastRoundTotalPar[i]
+    end
+    @lastToParMiddle6 = @lastScoreMiddle6 - lastTotalParMiddle6
+
+    lastTotalParLast6 = 0
+    for i in 12..17
+      lastTotalParLast6 += lastRoundTotalPar[i]
+    end
+    @lastToParLast6 = @lastScoreLast6 - lastTotalParLast6
+
+
+    # **********************************************************************************************************************************
+    # **********************************************************************************************************************************
+    # **********************************************************************************************************************************
+    # **********************************************************************************************************************************
+    # **********************************************************************************************************************************
 
     # last 5 rounds
-    @last5Score = Stat.where(user_id:session[:user_id]).pluck(:hole1_score, :hole2_score, :hole3_score, :hole4_score, :hole5_score, :hole6_score, :hole7_score, :hole8_score, :hole9_score, :hole10_score, :hole11_score, :hole12_score, :hole13_score, :hole14_score, :hole15_score, :hole16_score, :hole17_score, :hole18_score).last(5).sum.sum
-    @last5AveScore = @last5Score.to_f / 5 
+    last5Score = Stat.where(user_id:session[:user_id]).pluck(:hole1_score, :hole2_score, :hole3_score, :hole4_score, :hole5_score, :hole6_score, :hole7_score, :hole8_score, :hole9_score, :hole10_score, :hole11_score, :hole12_score, :hole13_score, :hole14_score, :hole15_score, :hole16_score, :hole17_score, :hole18_score).last(5)
+    @last5Score = last5Score.sum.sum
+    @last5AveScore = @last5Score.to_f / last5Score.count 
+    totalParLast5Rounds = Stat.where(user_id:session[:user_id]).pluck(:hole1_par, :hole2_par, :hole3_par, :hole4_par, :hole5_par, :hole6_par, :hole7_par, :hole8_par, :hole9_par, :hole10_par, :hole11_par, :hole12_par, :hole13_par, :hole14_par, :hole15_par, :hole16_par, :hole17_par, :hole18_par).last(5)
+    @totalParLast5Rounds = totalParLast5Rounds.sum.sum
+    @toParLast5Rounds = (@last5Score.to_f - @totalParLast5Rounds.to_f) / totalParLast5Rounds.count
+
+    # fairways
+    last5Fairways = Stat.where(user_id:session[:user_id]).pluck(:hole1_fway, :hole2_fway, :hole3_fway, :hole4_fway, :hole5_fway, :hole6_fway, :hole7_fway, :hole8_fway, :hole9_fway, :hole10_fway, :hole11_fway, :hole12_fway, :hole13_fway, :hole14_fway, :hole15_fway, :hole16_fway, :hole17_fway, :hole18_fway).last(5)
+
+    last5fYesCount = 0
+    last5fLeftCount = 0
+    last5fRightCount = 0
+    last5nulCount = 0
+
+    last5Fairways.each do |nested|
+      nested.each do |i|
+        if i == "yes"
+          last5fYesCount += 1
+        elsif i == "left"
+          last5fLeftCount += 1
+        elsif i == "right"
+          last5fRightCount += 1
+        else
+          last5nulCount += 1
+        end
+      end
+    end
+    @last5Fairway = ((last5fYesCount.to_f / ((last5Fairways.count * 18) - last5nulCount)) * 100).round(1)
+    @last5FairwayLeft = ((last5fLeftCount.to_f / ((last5Fairways.count * 18) - last5nulCount)) * 100).round(1)
+    @last5FairwayRight = ((last5fRightCount.to_f / ((last5Fairways.count * 18) - last5nulCount)) * 100).round(1)
+   
+
+
 
 
     render :layout => false

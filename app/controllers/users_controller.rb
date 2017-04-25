@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+
   def index
   end
   def new
@@ -12,6 +13,7 @@ class UsersController < ApplicationController
   	else
       flash[:errors] = @user.errors.full_messages
   		redirect_to :back
+
   	end
   end
   def home

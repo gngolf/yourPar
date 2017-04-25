@@ -30,11 +30,11 @@
           <% end %>
           <ul id="nav-mobile" class="right hide-on-med-and-down">
             <% if current_user %>
-              <li id="nav-name"><%= @user.first_name %></li>
+              <li id="nav-name" class="black-text"><%= @user.first_name %></li>
               <li><form action='/sessions/destroy' method='post'>
                 <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
                 <input type='hidden' name='_method' value='delete'>
-                <button class="btn waves-effect waves-light cyan accent-3" type="submit" name="submit">Logout</button>
+                <button class="btn waves-effect waves-light teal lighten-3" type="submit" name="submit">Logout</button>
               </form></li>
             <% end %>
           </ul>
@@ -49,8 +49,8 @@
     <%= yield %>
   </body>
   <footer class="page-footer">
-      <div class="footer-copyright">
-          Graphics Made With: Logomakr.com
+      <div class="footer-copyright valign-wrapper">
+          <p class="grey-text text-lighten-1">Graphics Made With: Logomakr.com</p>
       </div>
   </footer>
 </html>

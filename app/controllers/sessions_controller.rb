@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
   		session[:user_id] = @user.id
   		redirect_to "/users/#{@user.id}/home"
   	else
-  		flash[:errors] = ["Invalid combination"]
+  		flash[:errors_login] = "Invalid combination"
   		redirect_to "/"
   	end
   	end

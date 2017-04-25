@@ -25,11 +25,11 @@
           <a href="/users/<%= @user.id %>/home" class="brand-logo"><%= image_tag "logo.png" %></a>
           <ul id="nav-mobile" class="right">
             <% if current_user %>
-          	  <li id="nav-name"><%= @user.first_name %></li>
+          	  <li id="nav-name" class="black-text"><%= @user.first_name %></li>
               <li><form action='/sessions/destroy' method='post'>
                 <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
                 <input type='hidden' name='_method' value='delete'>
-                <button class="btn waves-effect waves-light cyan accent-3" type="submit" name="submit">Logout</button>
+                <button class="btn waves-effect waves-light teal lighten-3" type="submit" name="submit">Logout</button>
               </form></li>
             <% end %>
           </ul>
@@ -41,18 +41,39 @@
 		<h1 class="grey-text text-lighten-5">yourPAR</h1>
 	    <h5 class="grey lighten-4 grey-text text-darken-1">golf statistics for the modern player</h5>
 	    <br>
-	    <a class="btn-large waves-effect waves-light cyan accent-3" href="/stats/<%=@user.id %>/new">ADD A ROUND</a>
+	    <a class="btn-large waves-effect waves-light teal lighten-3" href="/stats/<%=@user.id %>/new">ADD A ROUND</a>
 	</div>
 	<div class="row" id="stats_table">
 	    <div class="col s12">
 	      	<ul class="tabs">
-	        	<li class="tab col s4"><a href="#stats_summary">Statistical Summary</a></li>
-	        	<li class="tab col s4"><a href="#last_round">Last Round</a></li>
+	        	<li class="tab col s4 teal-text text-lighten-3"><a href="#stats_summary">Statistical Summary</a></li>
 	        	<li class="tab col s4"><a href="#last_5_rounds">Last 5 Rounds</a></li>
+	        	<li class="tab col s4"><a href="#last_10_rounds">Last 10 Rounds</a></li>
 	        	
 	      	</ul>
 	    </div>
 	    <div id="stats_summary" class="col s12">
+	    	<div class="stats_summary">
+	    		<div class="col s6 m6 l3 scoring_average">
+	    			<h2><%= @averageScore %></h2>
+	    			<h6>Scoring Average</h6>
+	    		</div>
+	    		<div class="col s6 m6 l3 fairways">
+	    			<h2><%= @fairway %>%</h2>
+	    			<h6>Fairways Hit</h6>
+	    		</div>
+	    		<div class="col s6 m6 l3 greens">
+	    			<h2><%= @gir %>%</h2>
+	    			<h6>Greens Hit</h6>
+	    		</div>
+	    		<div class="col s6 m6 l3 putts">
+	    			<h2><%= @averagePutts %></h2>
+	    			<h6>Putts Per Round</h6>
+	    		</div>
+	    	</div>
+	    	<hr>
+	    	<br>
+	    	<h5 class="table_header">Here's Your Full Breakdown of Your Stats...</h5>
 	    	<table class="striped">
 	    		<thead>
 	    			<tr>
@@ -181,7 +202,7 @@
 	    		</tbody>
 	    	</table>
 	    </div>
-	    <div id="last_round" class="col s12">
+	    <div id="last_5_rounds" class="col s12">
 	    	<table class="centered">
 	    		<thead>
 	    			<tr>
@@ -197,14 +218,35 @@
 	    		<tbody>
 	    			<tr>
 	    				<td>Score</td>
-	    				<td><%= @lastScore %></td>
+	    				<td><%= @last5AveScore %></td>
+	    				<td><%=  %></td>
+	    				<td><%=  %></td>
+	    				<td><%=  %></td>
+	    				<td><%=  %></td>
+	    				<td><%=  %></td>
 	    			</tr>
 	    			<tr>
 	    				<td>To Par</td>
+	    				<td><%= @toParLast5Rounds %></td>
+	    				<td><%=  %></td>
+	    				<td><%=  %></td>
+	    				<td><%=  %></td>
+	    				<td><%=  %></td>
+	    				<td><%=  %></td>
 	    			</tr>
 	    			<tr>
 	    				<td>Fairways</td>
+	    				<td><%= @last5Fairway %>%</td>
 	    			</tr>
+	    			<tr>
+	    				<td>Fairways Missed Left</td>
+	    				<td><%= @last5FairwayLeft %>%</td>
+	    			</tr>
+	    			<tr>
+	    				<td>Fairways Missed Right</td>
+	    				<td><%= @last5FairwayRight %>%</td>
+	    			</tr>
+
 	    			<tr>
 	    				<td>Greens In Regulation</td>
 	    			</tr>
@@ -223,7 +265,7 @@
 	    		</tbody>
 	    	</table>
 	    </div>
-	    <div id="last_5_rounds" class="col s12">
+	    <div id="last_10_rounds" class="col s12">
 	    	<table class="centered">
 	    		<thead>
 	    			<tr>
@@ -266,6 +308,14 @@
 	    	</table>
 	    </div>
 	</div>
+	<div class="add_button">
+		<a class="btn-large waves-effect waves-light teal lighten-3" href="/stats/<%=@user.id %>/new">ADD A ROUND</a>
+	</div>
 </div>
 </body>
+<footer class="page-footer">
+      <div class="footer-copyright valign-wrapper">
+          <p class="grey-text text-lighten-1">Graphics Made With: Logomakr.com</p>
+      </div>
+  </footer>
 </html>

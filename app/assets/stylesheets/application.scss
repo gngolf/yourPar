@@ -1,5 +1,5 @@
 @import "materialize/components/color";
-$primary-color: color("indigo", "lighten-2") !default;
+$primary-color: color("grey", "lighten-4") !default;
 $input-border-color: color("grey", "darken-4") !default;
 $select-background: color("grey", "lighten-1") !default;
 $select-border: 1px solid color("green", "base") !default;
@@ -84,9 +84,9 @@ select
 	height: 60px;
 }
 
-footer
+footer p
 {
-	text-align: center;
+	padding-left: 20px;
 }
 
 .container
@@ -96,7 +96,7 @@ footer
 
 .input-field label
 {
-	color: black;
+	color: grey;
 }
 
 .input-field input[type=text]
@@ -108,12 +108,20 @@ footer
 {
 	margin-top: 60px;
 }
-
+.table_header
+{
+    text-align: center;
+}
 #nav-name
 {
 	text-transform: uppercase;
 	padding-right: 10px;
 
+}
+
+.home_name
+{
+    text-transform: uppercase;
 }
 
 .stat_title
@@ -136,4 +144,28 @@ footer
 .stat_title h1
 {
 	font-weight: 900;
+}
+button
+{
+    color: #80cbc4;
+}
+.tabs .tab
+{
+    color: grey;
+}
+.tabs .tab a:hover, .tabs .tab a.active
+{
+    color: teal;
+}
+.stats_summary
+{
+    text-align: center;
+}
+.add_button
+{
+    text-align: center;
+}
+.flash
+{
+    color: red;
 }
