@@ -8,7 +8,7 @@
 		<div class="name">
 			<h2 class="home_name">Hi <%= @user.first_name %>!</h2>
 			<a class="btn-large waves-effect waves-light teal lighten-3" href="/stats/<%=@user.id %>/new">ADD A ROUND</a>
-			<% if @count != 0 %>
+			<% if @count > 0 %>
 				<a class="btn-large waves-effect waves-light teal lighten-3" href="/stats/<%=@user.id %>/show">View Stats</a>
 			<% end %>
 		</div>

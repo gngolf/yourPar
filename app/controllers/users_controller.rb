@@ -18,6 +18,7 @@ class UsersController < ApplicationController
   end
   def home
   	@user = User.find(params[:id])
+    @count = Stat.where(user_id:session[:user_id]).count
   end
   private
     def user_params
