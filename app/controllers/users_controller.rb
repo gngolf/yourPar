@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  
 
   def index
     session[:user_id] = nil
@@ -20,10 +21,14 @@ class UsersController < ApplicationController
   def home
   	@user = User.find(params[:id])
     @count = Stat.where(user_id:session[:user_id]).count
+    @all_users = User.all
   end
+  
   private
     def user_params
     	params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
     end
+
+   
 end
 

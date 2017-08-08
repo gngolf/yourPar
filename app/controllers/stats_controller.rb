@@ -29,6 +29,7 @@ class StatsController < ApplicationController
   end
   def show
     @user = User.find(params[:id])
+    @count = Stat.where(user_id:session[:user_id]).count
     
     # score related stats
     # summary stats
